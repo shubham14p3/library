@@ -15,11 +15,33 @@ const btnUtils = {
         let row = btn.parentNode.parentNode
         myLibrary.splice(index, 1)
         row.parentNode.removeChild(row);
-
         console.log(index)
         console.log(myLibrary)
+    },
 
+    toggleReadBtn: (book) => {
+        let btn = document.createElement('button')
+        btn.setAttribute('class', 'btn btn-sm btn-info')
+        if (book.read == true) {
+            btn.innerHTML = 'True'
+        } else if (book.read == false) {
+            btn.innerHTML = 'False'
+        }
+        btn.addEventListener('click', function() { btnUtils.handleToggle(book, btn) })
 
+        return btn
+    },
+
+    handleToggle: (book, btn) => {
+        event.preventDefault()
+        if (book.read == true) {
+            book.read = false
+            btn.innerHTML = 'False'
+        }
+        if (book.read == false) {
+            book.read = true
+            btn.innerHTML = 'True'
+        }
 
     },
 
@@ -35,7 +57,6 @@ btnUtils.print()
 let myLibrary = [{
         title: "lkjlS",
         author: "Awesome Raj",
-
         pages: 45,
         read: false,
     },
@@ -132,7 +153,11 @@ function addRows(database) {
         actionTd = tr.insertCell(book.length)
 
         let deleteButton = btnUtils.deleteButton(index);
+        let toggleButton = btnUtils.toggleReadBtn(book)
+
         deleteButton.setAttribute('data-book-index', index)
+        actionTd.appendChild(toggleButton)
+        actionTd = tr.insertCell(book.length)
         actionTd.appendChild(deleteButton)
     });
 }
