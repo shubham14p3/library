@@ -1,63 +1,68 @@
-# Project Name
+# BOOK LIBRARY ON JS
 
-> One paragraph statement about the project.
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
 
-![screenshot](./app_screenshot.png)
+We are creating a small Book Library App with help of JS. In this section we are working in understanding of  Objects and the Object Constructor. This web app allows the user to add and remove books, and also toggle between read and unread status for added books.
 
-Additional description about the project and its features.
+### Predefined Library
+
+![screenshot1](assets/images/book1.PNG)
+
+### Adding Books to the Library
+
+![screenshot2](assets/images/book2.PNG)
+
+
+## Live Version
+
+[Livelink] https://ancient-bastion-12309.herokuapp.com/users/sign_in
 
 ## Built With
 
-- Major languages,
-- frameworks,
-- technologies used
-
-## Live Demo
-
-[Live Demo Link](https://livedemo.com)
-
+- HTML + CSS
+- JavaScript
+- Bootstrap
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
+To get started with the app, cd to the directory where you would like the repo to live by typing on your terminal:
 
+Clone the repo typing:
 
-To get a local copy up and running follow these simple example steps.
+```
+$ git clone https://github.com/shubham14p3/library.git
+```
 
-### Prerequisites
-
-### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
+##  Features / Usage
+- Three books added by default for the demo.
+- Click "Add new" to add a new book using the provided form.
+- We do have validation for Author name and Pages Entered.
+- After including the required data, hit "Save". You will see the notice message flashing.
+- The book is displayed. If the page is reloaded previously added data is removed since there is no DB or local storage set up.
 
 
 ## Authors
 
-👤 **Author1**
+👤 **Cyrus Kiprop**
 
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+- Github: [Cyrus-Kiprop](https://github.com/Cyrus-Kiprop)
+- Twitter: [@kipropJS](https://twitter.com/kipropJS)
+- Linkedin: [Cyrus Kiprop](https://www.linkedin.com/in/cyrus-kiprop-ba7320120/)
 
-👤 **Author2**
 
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+👤 **Shubham Raj**
+
+- Github: [@ShubhamRaj](https://github.com/shubham14p3)
+- Linkedin: [Shubham14p3](https://www.linkedin.com/in/shubham14p3/)
 
 ## 🤝 Contributing
 
 Contributions, issues and feature requests are welcome!
 
-Feel free to check the [issues page](issues/).
+Feel free to check the [issues page](https://github.com/shubham14p3//library/issues/).
 
 ## Show your support
 
@@ -65,10 +70,15 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+- Project requested by [Microverse Program](https://www.microverse.org/).
 
-## 📝 License
+<!-- MARKDOWN LINKS & IMAGES -->
 
-This project is [MIT](lic.url) licensed.
+[contributors-shield]: https://img.shields.io/github/contributors/shubham14p3/members-only.svg?style=flat-square
+[contributors-url]: https://github.com/shubham14p3/library/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/shubham14p3/members-only.svg?style=flat-square
+[forks-url]: https://github.com/shubham14p3/library/network/members
+[stars-shield]: https://img.shields.io/github/stars/shubham14p3/members-only.svg?style=flat-square
+[stars-url]: https://github.com/shubham14p3/library/stargazers
+[issues-shield]: https://img.shields.io/github/issues/shubham14p3/members-only.svg?style=flat-square
+[issues-url]: https://github.com/shubham14p3/library/issues
