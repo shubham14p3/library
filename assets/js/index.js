@@ -154,9 +154,9 @@ const formUtils = {
 
     const { authorError, pagesError, titleError } = errors;
     if (
-      authorError.length === 0 &&
-      titleError.length === 0 &&
-      pagesError.length === 0
+      authorError.length === 0
+      && titleError.length === 0
+      && pagesError.length === 0
     ) {
       addBookToLibrary(validData);
 
