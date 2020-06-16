@@ -19,7 +19,7 @@ const btnUtils = {
         console.log(myLibrary)
     },
 
-    toggleReadBtn: (book) => {
+    togglereadBtn: (book) => {
         let btn = document.createElement('button')
         btn.setAttribute('class', 'btn btn-sm btn-info')
 
@@ -71,24 +71,24 @@ const tableUtils = {
 
 // this is our book store
 let myLibrary = [{
-        title: "lkjlS",
-        author: "Awesome Raj",
+        title: "Microverse Professional",
+        author: "Awesome",
         pages: 45,
         read: false,
     },
     {
-        title: "lkjlS",
+        title: "Microverse Technical",
         author: "Iokote",
         pages: 45,
         read: true,
     },
 
     {
-        title: "lkjlS",
-        author: "Subhahjhm Raj",
+        title: "Microverse Data Structure",
+        author: "Subham",
         pages: 45,
         read: true,
-    },
+    }
 
 ];
 
@@ -109,7 +109,7 @@ function addBookToLibrary(book) {
 
 const handleNewBook = () => {
     let form = document.getElementById("add-book-form");
-    form.setAttribute("class", "d-block !important");
+    form.setAttribute("class", "form-container");
 };
 
 const handleSubmit = (event) => {
@@ -133,7 +133,7 @@ const handleSubmit = (event) => {
     addBookToLibrary(data);
     console.log(myLibrary)
     // reset the dom
-    table = document.getElementById('table')
+    table = document.getElementById('Table')
     tr = table.getElementsByTagName('tr')
     // clear the previous data and repaste the rows with new data
     for (let i = tr.length - 1; i >= 1; i--) {
@@ -186,7 +186,7 @@ function addRows(database) {
         actionTd = tr.insertCell(book.length)
 
         let deleteButton = btnUtils.deleteButton(index);
-        let toggleButton = btnUtils.toggleReadBtn(book)
+        let toggleButton = btnUtils.togglereadBtn(book)
 
         deleteButton.setAttribute('data-book-index', index)
         actionTd.appendChild(toggleButton)
