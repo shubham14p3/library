@@ -22,28 +22,27 @@ const btnUtils = {
     toggleReadBtn: (book) => {
         let btn = document.createElement('button')
         btn.setAttribute('class', 'btn btn-sm btn-info')
-        if (book.read == true) {
-            btn.innerHTML = 'True'
-        } else if (book.read == false) {
-            btn.innerHTML = 'False'
-        }
-        btn.addEventListener('click', function() { btnUtils.handleToggle(book, btn) })
+
+        btn.innerHTML = book.read
+
+
+
+        btn.addEventListener('click', function() {
+            if (book.read == true) {
+                book.read = false
+
+                btn.innerHTML = false
+                console.log(book.read)
+            } else if (book.read == false) {
+                book.read = true
+                btn.innerHTML = true
+                console.log(book.read)
+            }
+        })
 
         return btn
     },
 
-    handleToggle: (book, btn) => {
-        event.preventDefault()
-        if (book.read == true) {
-            book.read = false
-            btn.innerHTML = 'False'
-        }
-        if (book.read == false) {
-            book.read = true
-            btn.innerHTML = 'True'
-        }
-
-    },
 
     print: () => {
         console.log('hello there ')
