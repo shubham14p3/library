@@ -25,11 +25,12 @@ const btnUtils = {
 
         btn.innerHTML = book.read
 
-
-
         btn.addEventListener('click', function() {
             if (book.read == true) {
                 book.read = false
+                console.log(book.read)
+
+                //  update the read seciton of the table
 
                 btn.innerHTML = false
                 console.log(book.read)
@@ -42,15 +43,31 @@ const btnUtils = {
 
         return btn
     },
-
-
-    print: () => {
-        console.log('hello there ')
-    }
-
 }
 
-btnUtils.print()
+
+const tableUtils = {
+
+    createTable: () => {
+        let theaders = ["title", "author", "pages", "read"];
+
+        const table = document.createElement("table");
+        table.setAttribute("id", "table");
+        table.setAttribute("class", "table-sm table table-dark");
+
+        let tr = table.insertRow(-1);
+
+        // creates the headers of the table
+        theaders.map((item) => {
+            let th = document.createElement("th");
+            th.setAttribute("class", "col");
+            th.innerHTML = item;
+            tr.appendChild(th);
+        });
+
+        return table
+    }
+}
 
 // this is our book store
 let myLibrary = [{
@@ -75,8 +92,12 @@ let myLibrary = [{
 
 ];
 
-function Book() {
+function Book(title, author, pages, read) {
     // the constructor...
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.read = read
 }
 
 function addBookToLibrary(book) {
@@ -88,7 +109,6 @@ function addBookToLibrary(book) {
 
 const handleNewBook = () => {
     let form = document.getElementById("add-book-form");
-
     form.setAttribute("class", "d-block !important");
 };
 
@@ -112,7 +132,17 @@ const handleSubmit = (event) => {
 
     addBookToLibrary(data);
     console.log(myLibrary)
+    // reset the dom
+    table = document.getElementById('table')
+    tr = table.getElementsByTagName('tr')
+    // clear the previous data and repaste the rows with new data
+    for (let i = tr.length - 1; i >= 1; i--) {
+        tr[i].remove()
+    }
+
+
     addRows(myLibrary)
+    // addRows(myLibrary)
 
     form.setAttribute("class", "d-none !important");
     //re- render the new data
@@ -130,6 +160,8 @@ function newBook() {
     btn.addEventListener("click", handleNewBook);
 }
 
+
+
 function addRows(database) {
     let table = document.getElementById("table");
 
@@ -137,7 +169,8 @@ function addRows(database) {
     console.log(rowCount);
 
     // loop through the data
-    database && database.map((book, index) => {
+    // rendering the data stuff
+    database.map((book, index) => {
         let tr = table.insertRow(rowCount);
         tr.setAttribute('data-row-index', index)
 
@@ -146,6 +179,7 @@ function addRows(database) {
             let td = document.createElement("td");
             td = tr.insertCell(index);
             td.innerHTML = element;
+            td.setAttribute('id', index)
         });
 
         let actionTd = document.createElement("td")
@@ -164,28 +198,14 @@ function addRows(database) {
 function newButton() {}
 
 const render = () => {
-    let theaders = ["title", "author", "pages", "read"];
-    // table
-    const table = document.createElement("table");
-    // add an id to the table
-    table.setAttribute("id", "table");
-    table.setAttribute("class", "table-sm table table-dark");
-
-    let tr = table.insertRow(-1);
-
-    // creates the headers of the table
-
-    theaders.forEach((item) => {
-        let th = document.createElement("th");
-        th.setAttribute("class", "col");
-        th.innerHTML = item;
-        tr.appendChild(th);
-    });
 
     let div = document.getElementById("container");
+    table = tableUtils.createTable()
+
     div.appendChild(table);
 
     addRows(myLibrary);
+
     newBook();
 
     submitForm();
