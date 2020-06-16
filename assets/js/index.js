@@ -1,132 +1,116 @@
-// Button utilities
-
 const btnUtils = {
+  deleteButton: (book) => {
+    let index = myLibrary.indexOf(book);
+    let btn = document.createElement("button");
+    btn.setAttribute("class", "btn btn-sm btn-warning");
+    btn.setAttribute("id", "delete-button");
+    btn.innerHTML = "Delete";
+    btn.addEventListener("click", function () {
+      btnUtils.handleDeleteBook(btn, index);
+    });
+    return btn;
+  },
 
-    deleteButton: (index) => {
-        let btn = document.createElement('button')
-        btn.setAttribute('class', 'btn btn-sm btn-warning')
-        btn.setAttribute('id', 'delete-button')
-        btn.innerHTML = 'Delete'
-        btn.addEventListener('click', function() { btnUtils.handleDeleteBook(btn, index) })
-        return btn
-    },
+  handleDeleteBook: (btn, index) => {
+    let row = btn.parentNode.parentNode;
+    myLibrary.splice(index, 1);
+    row.parentNode.removeChild(row);
+    tableUtils.resetTable();
+    tableUtils.addRows(myLibrary);
+  },
 
-    handleDeleteBook: (btn, index) => {
-        let row = btn.parentNode.parentNode
-        myLibrary.splice(index, 1)
-        row.parentNode.removeChild(row);
-        console.log(index)
-        console.log(myLibrary)
-    },
+  toggleReadBtn: (book) => {
+    let btn = document.createElement("button");
+    btn.setAttribute("class", "btn btn-sm btn-info");
+    btn.innerHTML = book.read;
 
-    toggleReadBtn: (book) => {
-        let btn = document.createElement('button')
-        btn.setAttribute('class', 'btn btn-sm btn-info')
+    btn.addEventListener("click", function () {
+      if (book.read == true) {
+        currentIdx = myLibrary.indexOf(book);
+        myLibrary[currentIdx].read = false;
+        btn.innerHTML = false;
+        tableUtils.resetTable();
+        tableUtils.addRows(myLibrary);
 
-        btn.innerHTML = book.read
+        btn.innerHTML = false;
+      } else if (book.read == false) {
+        currentIdx = myLibrary.indexOf(book);
+        myLibrary[currentIdx].read = true;
+        btn.innerHTML = true;
+        tableUtils.resetTable();
+        tableUtils.addRows(myLibrary);
+      }
+    });
 
-        btn.addEventListener('click', function() {
-            if (book.read == true) {
-                book.read = false
-                console.log(book.read)
-
-                //  update the read seciton of the table
-
-                btn.innerHTML = false
-                console.log(book.read)
-            } else if (book.read == false) {
-                book.read = true
-                btn.innerHTML = true
-                console.log(book.read)
-            }
-        })
-
-        return btn
-    },
-}
-
-
-const tableUtils = {
-
-    createTable: () => {
-        let theaders = ["title", "author", "pages", "read"];
-
-        const table = document.createElement("table");
-        table.setAttribute("id", "table");
-        table.setAttribute("class", "table-sm table table-dark");
-
-        let tr = table.insertRow(-1);
-
-        // creates the headers of the table
-        theaders.map((item) => {
-            let th = document.createElement("th");
-            th.setAttribute("class", "col");
-            th.innerHTML = item;
-            tr.appendChild(th);
-        });
-
-        return table
-    }
-}
-// this is our Validation
-const dataValidation = {
-
-    numberValidation: (input) => {
-        let regex = /^\d+$/
-        return regex.test(input) ? true : false
-    },
-
-    textValidation: () => {
-        // your code here
-    }
-
-
-}
-
-// this is our book store
-let myLibrary = [{
-        title: "lkjlS",
-        author: "Awesome Raj",
-        pages: 45,
-        read: false,
-    },
-    {
-        title: "lkjlS",
-        author: "Iokote",
-        pages: 45,
-        read: true,
-    },
-
-    {
-        title: "lkjlS",
-        author: "Subhahjhm Raj",
-        pages: 45,
-        read: true,
-    },
-
-];
-
-function Book(title, author, pages, read) {
-    // the constructor...
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
-}
-
-function addBookToLibrary(book) {
-    // do stuff here
-
-    myLibrary.push(book);
-    return myLibrary;
-}
-
-const handleNewBook = () => {
-    let form = document.getElementById("add-book-form");
-    form.setAttribute("class", "d-block !important");
+    return btn;
+  },
 };
 
-const handleSubmit = (event) => {
+const tableUtils = {
+  resetTable: () => {
+    table = document.getElementById("table");
+    tr = table.getElementsByTagName("tr");
+    for (let i = tr.length - 1; i >= 1; i--) {
+      tr[i].remove();
+    }
+  },
+
+  createTable: () => {
+    let theaders = ["Title", "Author", "Pages", "Read"];
+
+    const table = document.createElement("table");
+    table.setAttribute("id", "table");
+    table.setAttribute("class", "table-sm table table-dark");
+
+    let tr = table.insertRow(-1);
+
+    theaders.map((item) => {
+      let th = document.createElement("th");
+      th.setAttribute("class", "col");
+      th.innerHTML = item;
+      tr.appendChild(th);
+    });
+
+    return table;
+  },
+
+  addRows: (database) => {
+    let table = document.getElementById("table");
+
+    let rowCount = table.rows.length;
+
+    database.map((book, index) => {
+      let tr = table.insertRow(rowCount);
+      tr.setAttribute("data-row-index", index);
+
+      Object.values(book).map((element, index) => {
+        let td = document.createElement("td");
+        td = tr.insertCell(index);
+        td.innerHTML = element;
+        td.setAttribute("id", index);
+      });
+
+      let actionTd = document.createElement("td");
+      actionTd = tr.insertCell(book.length);
+
+      let deleteButton = btnUtils.deleteButton(book);
+      let toggleButton = btnUtils.toggleReadBtn(book);
+
+      deleteButton.setAttribute("data-book-index", index);
+      actionTd.appendChild(toggleButton);
+      actionTd = tr.insertCell(book.length);
+      actionTd.appendChild(deleteButton);
+    });
+  },
+};
+
+const formUtils = {
+  showForm: () => {
+    let form = document.getElementById("add-book-form");
+    form.setAttribute("class", "form-container");
+  },
+
+  handleSubmit: (event) => {
     event.preventDefault();
     let form = document.getElementById("add-book-form");
     let title = document.getElementById("title").value;
@@ -134,99 +118,134 @@ const handleSubmit = (event) => {
     let pages = document.getElementById("pages").value;
     let read = document.getElementById("read").value;
 
-    // reset the fields after the user enters the details
-    form.reset()
-
     data = {
-        title,
-        author,
-        pages,
-        read,
+      title,
+      author,
+      pages,
+      read,
     };
 
-    addBookToLibrary(data);
-    console.log(myLibrary)
-    // reset the dom
-    table = document.getElementById('table')
-    tr = table.getElementsByTagName('tr')
-    // clear the previous data and repaste the rows with new data
-    for (let i = tr.length - 1; i >= 1; i--) {
-        tr[i].remove()
+    const { validData, errors } = validateUtils.validateInputs(data);
+
+    console.log(Object.values(errors));
+    if (
+      errors.authorError.length == 0 &&
+      errors.titleError.length == 0 &&
+      errors.pagesError.length == 0
+    ) {
+      addBookToLibrary(validData);
+
+      tableUtils.resetTable();
+      tableUtils.addRows(myLibrary);
+      alert("successfully added the item");
+    } else {
+      Object.keys(errors).map((key) => {
+        if (errors[key] !== []) {
+          let span = document.getElementById(key);
+          console.log(key);
+          span.setAttribute("class", "error-message");
+          errors[key].map((error) => (span.innerHTML = error));
+        }
+      });
     }
-
-
-    addRows(myLibrary)
-    // addRows(myLibrary)
+    form.reset();
 
     form.setAttribute("class", "d-none !important");
-    //re- render the new data
-    alert("successfully added the item");
-};
+  },
 
-const submitForm = () => {
+  submitForm: () => {
     let form = document.getElementById("add-book-form");
-    form.addEventListener("submit", handleSubmit);
+    form.addEventListener("submit", formUtils.handleSubmit);
+  },
 };
 
-// handle the addition of the a new book
+const validateUtils = {
+  isEmpty: (data, errors) => {
+    data.title ? true : errors.titleError.push("Title can't be blank");
+    data.pages ? true : errors.pagesError.push("Pages can't be blank");
+    data.author ? true : errors.authorError.push("Author can't be blank");
+
+    return errors;
+  },
+
+  validateNum: (num, errors) => {
+    if (Number(num) === NaN && num !== "") {
+      errors.pagesError.push("Please Insert a number");
+    }
+    return errors;
+  },
+
+  validateInputs: (data) => {
+    errors = {
+      authorError: [],
+      titleError: [],
+      pagesError: [],
+    };
+
+    errors = validateUtils.isEmpty(data, errors);
+    errors = validateUtils.validateNum(data.pages, errors);
+
+    return {
+      errors,
+      validData: data,
+    };
+  },
+};
+
+let myLibrary = [
+  {
+    title: "48 laws of power",
+    author: "Awesome Raj",
+    pages: 45,
+    read: false,
+  },
+  {
+    title: "Introduction to programming for newbies",
+    author: "Cyrus Kiprop",
+    pages: 65,
+    read: true,
+  },
+
+  {
+    title: "Microverse Data Structure",
+    author: "Ariel Camus",
+    pages: 67,
+    read: true,
+  },
+];
+
+function Book(title, author, pages, read) {
+  // the constructor...
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+}
+
+function addBookToLibrary(book) {
+  // do stuff here
+  const newBook = new Book(book.title, book.author, book.pages, book.read);
+  myLibrary.push(newBook);
+
+  return myLibrary;
+}
+
 function newBook() {
-    let btn = document.getElementById("new-book");
-    btn.addEventListener("click", handleNewBook);
+  let btn = document.getElementById("new-book");
+  btn.addEventListener("click", formUtils.showForm);
 }
-
-
-
-function addRows(database) {
-    let table = document.getElementById("table");
-
-    let rowCount = table.rows.length; // first get the number of row in the table
-    console.log(rowCount);
-
-    // loop through the data
-    // rendering the data stuff
-    database.map((book, index) => {
-        let tr = table.insertRow(rowCount);
-        tr.setAttribute('data-row-index', index)
-
-        // defining the table cells
-        Object.values(book).map((element, index) => {
-            let td = document.createElement("td");
-            td = tr.insertCell(index);
-            td.innerHTML = element;
-            td.setAttribute('id', index)
-        });
-
-        let actionTd = document.createElement("td")
-        actionTd = tr.insertCell(book.length)
-
-        let deleteButton = btnUtils.deleteButton(index);
-        let toggleButton = btnUtils.toggleReadBtn(book)
-
-        deleteButton.setAttribute('data-book-index', index)
-        actionTd.appendChild(toggleButton)
-        actionTd = tr.insertCell(book.length)
-        actionTd.appendChild(deleteButton)
-    });
-}
-
-function newButton() {}
 
 const render = () => {
+  let div = document.getElementById("container");
+  table = tableUtils.createTable();
 
-    let div = document.getElementById("container");
-    table = tableUtils.createTable()
+  div.appendChild(table);
 
-    div.appendChild(table);
+  tableUtils.addRows(myLibrary);
 
-    addRows(myLibrary);
+  newBook();
 
-    newBook();
-
-    submitForm();
+  formUtils.submitForm();
 };
 
 render();
-
-
-
-// some utils
