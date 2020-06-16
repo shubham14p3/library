@@ -70,18 +70,17 @@ const tableUtils = {
 }
 // this is our Validation
 const dataValidation = {
-
-    numberValidation: (input) => {
-        let regex = /^\d+$/
-        return regex.test(input) ? true : false
-    },
-
-    textValidation: () => {
-        // your code here
-    }
-
-
-}
+	// this is our Validation for number
+  numberValidation: (input) => {
+    let regex = /^\d+$/;
+    return regex.test(input) ? true : false;
+  },
+// this is our Validation for our text
+  textValidation: (input) => {
+    let regex = /^[A-Za-z]+$/;
+    return regex.test(input) ? true : false;
+  }
+};
 
 // this is our book store
 let myLibrary = [{
