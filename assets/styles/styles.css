@@ -1,0 +1,13 @@
+body {
+  background-color: bisque;
+  width: 100vh;
+  font-size: 14px;
+}
+.container {
+  width: 50%;
+  margin: auto;
+}
+
+.container input[type="button"] {
+  font-size: 14px !important;
+}

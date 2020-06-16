@@ -5,7 +5,7 @@ let myLibrary = [
     author: "Subham Raj",
     pages: 45,
     read: false,
-  }
+  },
 ];
 
 function Book() {
@@ -17,6 +17,47 @@ function addBookToLibrary(book) {
 
   myLibrary.push(book);
   return myLibrary;
+}
+
+const handleNewBook = () => {
+  let form = document.getElementById("add-book-form");
+
+  form.setAttribute("class", "d-block !important");
+};
+
+const handleSubmit = (event) => {
+  event.preventDefault();
+  let form = document.getElementById("add-book-form");
+  let title = document.getElementById("title").value;
+  let author = document.getElementById("author").value;
+  let pages = document.getElementById("pages").value;
+  let read = document.getElementById("read").value;
+
+  data = {
+    title,
+    author,
+    pages,
+    read,
+  };
+
+  myLibrary.push(data);
+  console.log(data);
+
+  form.setAttribute("class", "d-none !important");
+  //re- render the new data
+  addRows();
+  alert("successfully added the item");
+};
+
+const submitForm = () => {
+  let form = document.getElementById("add-book-form");
+  form.addEventListener("submit", handleSubmit);
+};
+
+// handle the addition of the a new book
+function newBook() {
+  let btn = document.getElementById("new-book");
+  btn.addEventListener("click", handleNewBook);
 }
 
 function addRows() {
@@ -63,6 +104,9 @@ const render = () => {
   div.appendChild(table);
 
   addRows();
+  newBook();
+
+  submitForm();
 };
 
 render();
