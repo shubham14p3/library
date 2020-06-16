@@ -71,25 +71,16 @@ const tableUtils = {
 // this is our Validation
 const dataValidation = {
 
+    numberValidation: (input) => {
+        let regex = /^\d+$/
+        return regex.test(input) ? true : false
+    },
+
     textValidation: () => {
-        let theaders = ["author" "pages", "read"];
-
-        const table = document.createElement("table");
-        table.setAttribute("id", "table");
-        table.setAttribute("class", "table-sm table table-dark");
-
-        let tr = table.insertRow(-1);
-
-        // creates the headers of the table
-        theaders.map((item) => {
-            let th = document.createElement("th");
-            th.setAttribute("class", "col");
-            th.innerHTML = item;
-            tr.appendChild(th);
-        });
-
-        return table
+        // your code here
     }
+
+
 }
 
 // this is our book store
