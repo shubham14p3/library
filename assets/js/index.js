@@ -4,7 +4,6 @@ const btnUtils = {
 
     deleteButton: (book) => {
         let index = myLibrary.indexOf(book)
-        console.log(index)
         let btn = document.createElement('button')
         btn.setAttribute('class', 'btn btn-sm btn-warning')
         btn.setAttribute('id', 'delete-button')
@@ -22,24 +21,28 @@ const btnUtils = {
     },
 
     toggleReadBtn: (book) => {
+
         let btn = document.createElement('button')
         btn.setAttribute('class', 'btn btn-sm btn-info')
-
         btn.innerHTML = book.read
 
         btn.addEventListener('click', function() {
             if (book.read == true) {
-                book.read = false
-                console.log(book.read)
+                currentIdx = myLibrary.indexOf(book)
+                myLibrary[currentIdx].read = false
+                btn.innerHTML = false
+                tableUtils.resetTable()
+                addRows(myLibrary)
+                //  update the read section of the table
 
-                //  update the read seciton of the table
 
                 btn.innerHTML = false
-                console.log(book.read)
             } else if (book.read == false) {
-                book.read = true
+                currentIdx = myLibrary.indexOf(book)
+                myLibrary[currentIdx].read = true
                 btn.innerHTML = true
-                console.log(book.read)
+                tableUtils.resetTable()
+                addRows(myLibrary)
             }
         })
 
@@ -80,20 +83,20 @@ const tableUtils = {
 
 // this is our book store
 let myLibrary = [{
-        title: "lkjlS",
+        title: "48 laws of power",
         author: "Awesome Raj",
         pages: 45,
         read: false,
     },
     {
-        title: "lkjlS",
+        title: "Introduction to programming for newbies",
         author: "Iokote",
         pages: 45,
         read: true,
     },
 
     {
-        title: "lkjlS",
+        title: "Welcome to Microverse",
         author: "Subhahjhm Raj",
         pages: 45,
         read: true,
@@ -111,8 +114,9 @@ function Book(title, author, pages, read) {
 
 function addBookToLibrary(book) {
     // do stuff here
+    const newBook = new Book(book.title, book.author, book.pages, book.read)
+    myLibrary.push(newBook);
 
-    myLibrary.push(book);
     return myLibrary;
 }
 
@@ -140,7 +144,6 @@ const handleSubmit = (event) => {
     };
 
     addBookToLibrary(data);
-    console.log(myLibrary)
     // reset the dom
     tableUtils.resetTable()
     addRows(myLibrary)
@@ -168,7 +171,6 @@ function addRows(database) {
     let table = document.getElementById("table");
 
     let rowCount = table.rows.length; // first get the number of row in the table
-    console.log(rowCount);
 
     // loop through the data
     // rendering the data stuff
