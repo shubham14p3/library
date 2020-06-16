@@ -147,6 +147,7 @@ const formUtils = {
           errors[key].map((error) => (span.innerHTML = error));
         }
       });
+      alert("Error while adding the book");
     }
     form.reset();
 
