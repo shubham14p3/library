@@ -15,11 +15,6 @@ We are creating a small Book Library App with help of JS. In this section we are
 
 ![screenshot2](assets/images/book2.PNG)
 
-
-## Live Version
-
-[Livelink] https://ancient-bastion-12309.herokuapp.com/users/sign_in
-
 ## Built With
 
 - HTML + CSS
