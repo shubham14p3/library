@@ -82,7 +82,6 @@ const tableUtils = {
 
 const btnUtils = {
   deleteButton: (book) => {
-    // to abstract this code
     const index = myLibrary.indexOf(book);
     const btn = document.createElement('button');
     btn.setAttribute('class', 'btn btn-sm btn-warning');
