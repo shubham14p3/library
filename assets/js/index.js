@@ -38,12 +38,11 @@ const tableUtils = {
 
     const tr = table.insertRow(-1);
 
-    theaders.map((item) => {
+    theaders.forEach((item) => {
       const th = document.createElement('th');
       th.setAttribute('class', 'col');
       th.innerHTML = item;
       tr.appendChild(th);
-      return true;
     });
 
     return table;
@@ -70,7 +69,7 @@ const tableUtils = {
       actionTd = tr.insertCell(book.length);
 
       const deleteButton = btnUtils.deleteButton(book);
-      const toggleButton = btnUtils.toggleReadBtn(book);
+      const toggleButton = book && btnUtils.toggleReadBtn(book);
 
       deleteButton.setAttribute('data-book-index', index);
       actionTd.appendChild(toggleButton);
@@ -83,6 +82,7 @@ const tableUtils = {
 
 const btnUtils = {
   deleteButton: (book) => {
+    // to abstract this code
     const index = myLibrary.indexOf(book);
     const btn = document.createElement('button');
     btn.setAttribute('class', 'btn btn-sm btn-warning');
@@ -108,24 +108,27 @@ const btnUtils = {
     btn.innerHTML = book.read;
 
     btn.addEventListener('click', () => {
-      if (book.read === true) {
-        const currentIdx = myLibrary.indexOf(book);
-        myLibrary[currentIdx].read = false;
-        btn.innerHTML = false;
-        tableUtils.resetTable();
-        tableUtils.addRows(myLibrary);
-
-        btn.innerHTML = false;
-      } else if (book.read === false) {
-        const currentIdx = myLibrary.indexOf(book);
-        myLibrary[currentIdx].read = true;
-        btn.innerHTML = true;
-        tableUtils.resetTable();
-        tableUtils.addRows(myLibrary);
-      }
+      btnUtils.handleToggle(book, btn);
     });
 
     return btn;
+  },
+  handleToggle: (book, btn) => {
+    if (book.read === true) {
+      const currentIdx = myLibrary.indexOf(book);
+      myLibrary[currentIdx].read = false;
+      btn.innerHTML = false;
+      tableUtils.resetTable();
+      tableUtils.addRows(myLibrary);
+
+      btn.innerHTML = false;
+    } else if (book.read === false) {
+      const currentIdx = myLibrary.indexOf(book);
+      myLibrary[currentIdx].read = true;
+      btn.innerHTML = true;
+      tableUtils.resetTable();
+      tableUtils.addRows(myLibrary);
+    }
   },
 };
 
@@ -141,7 +144,7 @@ const formUtils = {
     const title = document.getElementById('title').value;
     const author = document.getElementById('author').value;
     const pages = document.getElementById('pages').value;
-    const read = document.getElementById('read').value;
+    const read = JSON.parse(document.getElementById('read').value);
 
     const data = {
       title,
@@ -158,10 +161,10 @@ const formUtils = {
       && titleError.length === 0
       && pagesError.length === 0
     ) {
-      addBookToLibrary(validData);
+      const newData = addBookToLibrary(validData);
 
       tableUtils.resetTable();
-      tableUtils.addRows(myLibrary);
+      tableUtils.addRows(newData);
     } else {
       Object.keys(errors).forEach((key) => {
         if (errors[key] !== []) {
