@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/styles/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Library</title>
+  </head>
+
+  <body>
+    <div id="container">
+      <h1>Book Library</h1>
+      <h3>Add book to your library list</h3>
+      <input
+        type="button"
+        class="btn mb-3 btn-sm btn-success"
+        id="new-book"
+        value="New Book"
+      />
+      <form id="add-book-form" class="d-none form-container">
+        <div class="form-group">
+          <label for="title">Title of the book</label>
+          <input
+            type="text"
+            id="title"
+            class="form-control"
+            placeholder="Enter title of the book"
+          />
+          <span id="titleError"></span>
+        </div>
+        <div class="form-group">
+          <label for="author">Author</label>
+          <input
+            type="text"
+            class="form-control"
+            id="author"
+            placeholder="Enter Author"
+          />
+          <span id="authorError"></span>
+        </div>
+        <div class="form-group">
+          <label for="pages">Pages</label>
+          <input
+            type="number"
+            class="form-control"
+            id="pages"
+            placeholder="No. of pages"
+          />
+          <span id="pagesError"></span>
+        </div>
+        <label for="pages">Read Status</label>
+        <select class="form-control form-control-sm" id="read">
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </select>
+        <button type="submit" class="btn btn-primary my-3">Add</button>
+      </form>
+    </div>
+    <script src="assets/js/index.js"></script>
+  </body>
+</html>
