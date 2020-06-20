@@ -130,7 +130,6 @@ const btnUtils = {
     }
   },
 };
-
 const formUtils = {
   showForm: () => {
     const form = document.getElementById('add-book-form');
