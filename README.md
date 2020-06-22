@@ -5,7 +5,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 
-We are creating a small Book Library App with help of JS. In this section we are working in understanding of  Objects and the Object Constructor. This web app allows the user to add and remove books, and also toggle between read and unread status for added books.
+We are creating a small Book Library App with help of JS. In this section we are working in understanding of Objects and the Object Constructor. This web app allows the user to add and remove books, and also toggle between read and unread status for added books.
 
 ### Predefined Library
 
@@ -14,6 +14,10 @@ We are creating a small Book Library App with help of JS. In this section we are
 ### Adding Books to the Library
 
 ![screenshot2](assets/images/book2.PNG)
+
+## Live Link
+
+[Live Demo](https://shubham14p3.github.io/library/)
 
 ## Built With
 
@@ -31,13 +35,13 @@ Clone the repo typing:
 $ git clone https://github.com/shubham14p3/library.git
 ```
 
-##  Features / Usage
+## Features / Usage
+
 - Three books added by default for the demo.
 - Click "Add new" to add a new book using the provided form.
 - We do have validation for Author name and Pages Entered.
 - After including the required data, hit "Save". You will see the notice message flashing.
 - The book is displayed. If the page is reloaded previously added data is removed since there is no DB or local storage set up.
-
 
 ## Authors
 
@@ -46,7 +50,6 @@ $ git clone https://github.com/shubham14p3/library.git
 - Github: [Cyrus-Kiprop](https://github.com/Cyrus-Kiprop)
 - Twitter: [@kipropJS](https://twitter.com/kipropJS)
 - Linkedin: [Cyrus Kiprop](https://www.linkedin.com/in/cyrus-kiprop-ba7320120/)
-
 
 👤 **Shubham Raj**
 
